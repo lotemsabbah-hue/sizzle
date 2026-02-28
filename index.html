@@ -9,15 +9,17 @@
     :root{
       --bg:#ffffff;
       --text:#111;
-      --muted:#666;
-      --accent:#d7de2a;
-      --line:#eaeaea;
+      --muted:#6b6b6b;
+      --line:#e9e9e9;
       --max:1200px;
       --radius:999px;
+
+      --accent:#d7de2a;
+      --cream:#f3f0e7;
+      --tile:#e9e7dc;
     }
 
     *{box-sizing:border-box}
-
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -25,16 +27,19 @@
       background:var(--bg);
     }
 
-    /* פס עליון */
+    /* Top promo bar */
     .promo{
       background:#0b0b0b;
       color:#fff;
       font-size:14px;
       padding:10px 16px;
       text-align:center;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
-    /* HEADER */
+    /* Header */
     header{
       position:sticky;
       top:0;
@@ -51,6 +56,7 @@
       display:grid;
       grid-template-columns: 1fr auto 1fr;
       align-items:center;
+      gap:12px;
     }
 
     .brand{
@@ -60,7 +66,6 @@
       justify-content:flex-start;
     }
 
-    /* לוגו */
     .logo img{
       height:52px;
       width:auto;
@@ -74,16 +79,12 @@
       justify-content:center;
       font-size:14px;
     }
-
     .menu a{
       color:var(--text);
       text-decoration:none;
       padding:8px 6px;
     }
-
-    .menu a:hover{
-      opacity:.7;
-    }
+    .menu a:hover{opacity:.7}
 
     .actions{
       display:flex;
@@ -91,17 +92,15 @@
       justify-content:flex-end;
       gap:10px;
     }
-
     .iconbtn{
-      width:38px;
-      height:38px;
+      width:38px;height:38px;
       border:1px solid var(--line);
       border-radius:50%;
       background:#fff;
-      display:grid;
-      place-items:center;
+      display:grid;place-items:center;
       cursor:pointer;
     }
+    .iconbtn:hover{background:#fafafa}
 
     /* HERO */
     .hero{
@@ -110,18 +109,15 @@
       display:grid;
       place-items:stretch;
     }
-
     .hero::before{
       content:"";
-      position:absolute;
-      inset:0;
+      position:absolute; inset:0;
       background:
         linear-gradient(to left, rgba(0,0,0,.25), rgba(0,0,0,.05) 60%, rgba(0,0,0,0)),
         url("https://images.unsplash.com/photo-1522770179533-24471fcdba45?auto=format&fit=crop&w=2400&q=70");
       background-size:cover;
       background-position:center;
     }
-
     .hero-inner{
       position:relative;
       max-width:var(--max);
@@ -131,13 +127,11 @@
       display:flex;
       align-items:flex-end;
     }
-
     .hero-copy{
       max-width:680px;
       color:#fff;
       text-shadow: 0 8px 24px rgba(0,0,0,.35);
     }
-
     .hero-title{
       margin:0;
       font-size: clamp(40px, 6vw, 78px);
@@ -146,13 +140,11 @@
       letter-spacing:-.5px;
       color: var(--accent);
     }
-
     .hero-sub{
       margin:14px 0 22px;
       font-size: clamp(14px, 2vw, 18px);
       color: rgba(255,255,255,.92);
     }
-
     .cta{
       display:inline-flex;
       align-items:center;
@@ -163,122 +155,335 @@
       background: rgba(255,255,255,.95);
       color:#111;
       text-decoration:none;
+      font-weight:800;
+    }
+    .cta:hover{background:#fff}
+
+    /* FAVORITES */
+    .section{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:64px 16px 22px;
+    }
+    .section-title{
+      text-align:center;
+      margin:0;
+      font-size:38px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .section-sub{
+      text-align:center;
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .carousel-wrap{
+      position:relative;
+      max-width:var(--max);
+      margin:0 auto;
+      padding:24px 16px 60px;
+    }
+
+    .carousel{
+      display:flex;
+      gap:28px;
+      overflow:auto;
+      scroll-snap-type:x mandatory;
+      scroll-behavior:smooth;
+      padding:6px 4px 18px;
+    }
+
+    /* כדי שהחצים יהיו "שמאל/ימין" טבעי גם ב-RTL */
+    .carousel{ direction:ltr; }
+    .card{ direction:rtl; }
+
+    .carousel::-webkit-scrollbar{height:10px}
+    .carousel::-webkit-scrollbar-thumb{background:#dcdcdc;border-radius:999px}
+    .carousel::-webkit-scrollbar-track{background:#f3f3f3;border-radius:999px}
+
+    .card{
+      flex: 0 0 260px;
+      scroll-snap-align:start;
+      text-align:center;
+    }
+
+    .tile{
+      position:relative;
+      background:var(--tile);
+      border-radius:0;
+      aspect-ratio: 1 / 1;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+    }
+    .tile img{
+      max-width:68%;
+      max-height:68%;
+      object-fit:contain;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,.18));
+    }
+
+    .badge{
+      position:absolute;
+      top:12px;
+      right:12px;
+      background:#e8e8e8;
+      color:#222;
+      border:1px solid #cfcfcf;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:12px;
       font-weight:700;
     }
 
-    .cta:hover{
-      background:#fff;
+    .pname{
+      margin:14px 0 6px;
+      font-size:14px;
+      line-height:1.35;
     }
 
-    /* פס אייקונים תחתון */
-    .quick{
-      border-top:1px solid var(--line);
-      background:#fff;
-    }
-
-    .quick-inner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:14px 16px;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
+    .price{
+      margin:0;
+      font-size:14px;
       color:#222;
     }
+    .price s{
+      color:#8a8a8a;
+      margin-inline:6px;
+    }
 
-    .q{
+    .arrow{
+      position:absolute;
+      top:55%;
+      transform:translateY(-50%);
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      border:1px solid var(--line);
+      background:#fff;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      box-shadow: 0 10px 26px rgba(0,0,0,.10);
+      z-index:5;
+      user-select:none;
+    }
+    .arrow:hover{background:#fafafa}
+    .arrow.left{ left:10px; }
+    .arrow.right{ right:10px; }
+
+    /* תחתון כמו בתמונה */
+    .cream{
+      background:var(--cream);
+      border-top:1px solid var(--line);
+      padding:64px 0;
+    }
+    .cream-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 16px;
+      text-align:center;
+    }
+    .cream-title{
+      margin:0;
+      font-size:28px;
+      font-weight:800;
+    }
+    .cream-text{
+      margin:14px auto 0;
+      max-width:760px;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:14px;
+    }
+
+    .pill{
+      margin-top:26px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 22px;
+      border-radius:999px;
+      border:0;
+      background:#111;
+      color:#fff;
+      font-weight:800;
+      cursor:pointer;
+    }
+    .pill .wa{
+      width:26px;height:26px;border-radius:50%;
+      background:#25D366;
+      display:grid;place-items:center;
+      font-size:12px;
+      font-weight:900;
+      color:#fff;
+    }
+
+    /* WhatsApp floating */
+    .float{
+      position:fixed;
+      left:18px;
+      bottom:18px;
+      z-index:60;
       display:flex;
       align-items:center;
       gap:10px;
-      flex:1;
-      justify-content:center;
-      font-size:13px;
-      color:var(--muted);
-    }
-
-    .q b{
-      color:#111;
-    }
-
-    .qicon{
-      width:34px;
-      height:34px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      display:grid;
-      place-items:center;
+      padding:10px 12px;
       background:#fff;
+      border:1px solid var(--line);
+      border-radius:999px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    }
+    .float .dot{
+      width:34px;height:34px;border-radius:50%;
+      background:#25D366;
+      display:grid;place-items:center;
+      color:#fff;font-weight:900;
+      font-family: ui-sans-serif, system-ui;
+    }
+    .float a{
+      text-decoration:none;
+      color:#111;
+      font-weight:800;
+      font-size:14px;
     }
 
-    /* מובייל */
-    @media (max-width:900px){
-      .menu{display:none;}
-      .quick-inner{flex-wrap:wrap;}
-      .q{flex:1 1 40%;}
+    @media (max-width: 900px){
+      .menu{display:none}
+      .section-title{font-size:30px}
+      .card{flex-basis: 240px}
+      .arrow{display:none} /* במובייל לרוב גוללים עם אצבע */
     }
-
   </style>
 </head>
 
 <body>
-
-  <div class="promo">
-    משלוח חינם בקנייה מעל 399 ₪ • החזרות והחלפות בקלות
-  </div>
+  <div class="promo">משלוח חינם בקנייה מעל 399 ₪ • החלפות והחזרות בקלות</div>
 
   <header>
-    <nav class="nav">
-
+    <nav class="nav" aria-label="תפריט ראשי">
       <div class="brand">
         <div class="logo">
           <img src="logo.png" alt="Sizzle Logo">
         </div>
       </div>
 
-      <div class="menu">
+      <div class="menu" role="navigation">
         <a href="#">SALE</a>
         <a href="#">נשים</a>
         <a href="#">גברים</a>
         <a href="#">זוגות</a>
-        <a href="#">גיפט קארד</a>
+        <a href="#">ג׳יפט קארד</a>
         <a href="#">עלינו</a>
       </div>
 
       <div class="actions">
-        <button class="iconbtn">🔍</button>
-        <button class="iconbtn">👤</button>
-        <button class="iconbtn">🛒</button>
+        <button class="iconbtn" aria-label="חיפוש">🔍</button>
+        <button class="iconbtn" aria-label="חשבון">👤</button>
+        <button class="iconbtn" aria-label="עגלה">🛒</button>
       </div>
-
     </nav>
   </header>
 
+  <!-- HERO -->
   <main class="hero">
     <div class="hero-inner">
-      <section class="hero-copy">
-        <h1 class="hero-title">
-          play like a boy,<br>
-          enjoy like a man
-        </h1>
-        <p class="hero-sub">
-          גלו את הקולקציה שלנו ותבחרו את המוצר שמתאים לכם
-        </p>
-        <a class="cta" href="#">
-          ויברטורים לגברים →
-        </a>
+      <section class="hero-copy" aria-label="כותרת ראשית">
+        <h1 class="hero-title">play like a boy,<br>enjoy like a man</h1>
+        <p class="hero-sub">גלו את הקולקציה שלנו ותבחרו את המוצר שמתאים לכם</p>
+        <a class="cta" href="#">ויברטורים לגברים →</a>
       </section>
     </div>
   </main>
 
-  <section class="quick">
-    <div class="quick-inner">
-      <div class="q"><span class="qicon">🏅</span><span><b>איכות</b> מובטחת</span></div>
-      <div class="q"><span class="qicon">💬</span><span><b>שירות</b> זמין</span></div>
-      <div class="q"><span class="qicon">🚚</span><span><b>משלוח</b> מהיר</span></div>
-      <div class="q"><span class="qicon">📦</span><span><b>אריזה</b> דיסקרטית</span></div>
-      <div class="q"><span class="qicon">🛡️</span><span><b>תשלום</b> מאובטח</span></div>
+  <!-- FAVORITES -->
+  <section class="section" aria-label="מועדפים">
+    <h2 class="section-title">fizzz favorites</h2>
+    <p class="section-sub">המוצרים המומלצים והמככבים ביותר</p>
+  </section>
+
+  <section class="carousel-wrap" aria-label="קרוסלה מוצרים">
+    <button class="arrow left" id="prevBtn" aria-label="הקודם">‹</button>
+    <button class="arrow right" id="nextBtn" aria-label="הבא">›</button>
+
+    <div class="carousel" id="carousel">
+      <!-- כרטיס 1 -->
+      <article class="card">
+        <div class="tile">
+          <img alt="מוצר 1" src="https://images.unsplash.com/photo-1582582429413-3d3d1a5b32f1?auto=format&fit=crop&w=900&q=70">
+        </div>
+        <div class="pname">Tornado orgazmator מאסטר אוראלי</div>
+        <p class="price">₪ 399.00</p>
+      </article>
+
+      <!-- כרטיס 2 -->
+      <article class="card">
+        <div class="tile">
+          <img alt="מוצר 2" src="https://images.unsplash.com/photo-1512499617640-c2f999098c01?auto=format&fit=crop&w=900&q=70">
+        </div>
+        <div class="pname">Belle יונק שקט ומעורר</div>
+        <p class="price">₪ 379.00</p>
+      </article>
+
+      <!-- כרטיס 3 -->
+      <article class="card">
+        <div class="tile">
+          <span class="badge">NEW</span>
+          <img alt="מוצר 3" src="https://images.unsplash.com/photo-1585238342028-4b9a0c5fbd30?auto=format&fit=crop&w=900&q=70">
+        </div>
+        <div class="pname">Oh-il • Sensual Play Oil</div>
+        <p class="price">₪ 219.00</p>
+      </article>
+
+      <!-- כרטיס 4 -->
+      <article class="card">
+        <div class="tile">
+          <img alt="מוצר 4" src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=900&q=70">
+        </div>
+        <div class="pname">Helen ויברטור זוגי מושלם מרחוק</div>
+        <p class="price"><span>₪ 369.00</span> <s>₪ 399.00</s></p>
+      </article>
     </div>
   </section>
 
+  <!-- BOTTOM CREAM SECTION -->
+  <section class="cream" aria-label="סיכום">
+    <div class="cream-inner">
+      <h3 class="cream-title">pleasure meeting you ✳︎ sizzle</h3>
+      <p class="cream-text">
+        אנחנו כאן כדי להפוך אינטימיות לנגישה, טבעית ומהנה — עם שירות דיסקרטי, ייעוץ מקצועי ומשלוחים מהירים.
+        ויברטורים, אביזרי זוגיות ושמנים אינטימיים שנבחרו בקפידה — כדי שתגלו עוד רגע של איכות, בריאות ועצמה.
+      </p>
+
+      <button class="pill" type="button">
+        <span class="wa">WA</span>
+        ייעוץ דיסקרטי
+      </button>
+    </div>
+  </section>
+
+  <!-- Floating chat -->
+  <div class="float" aria-label="שיחה בוואטסאפ">
+    <div class="dot">WA</div>
+    <a href="#">לשיחה בוואטסאפ</a>
+  </div>
+
+  <script>
+    const carousel = document.getElementById("carousel");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    function scrollByCard(dir){
+      if(!carousel) return;
+      const card = carousel.querySelector(".card");
+      const step = (card?.getBoundingClientRect().width || 260) + 28; // רוחב + gap
+      carousel.scrollBy({ left: dir * step, behavior: "smooth" });
+    }
+
+    prevBtn?.addEventListener("click", () => scrollByCard(-1));
+    nextBtn?.addEventListener("click", () => scrollByCard(1));
+  </script>
 </body>
 </html>
